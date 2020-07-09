@@ -1,0 +1,80 @@
+<body>
+
+<script>
+
+function computerPlay(){
+
+    let computerNumber = Math.floor(Math.random() * (4 - 1)) + 1;
+    let computerSelection;
+    switch(computerNumber){
+        case 1: 
+            computerSelection = "ROCK";
+            break;
+        case 2:
+            computerSelection = "PAPER";
+            break;
+        case 3:
+            computerSelection = "SCISSORS"
+            break;
+
+    }
+    return computerSelection;
+}
+
+function playerPlay(){
+    let playerSelection = window.prompt("Rock, Paper or Scissors?")
+    playerSelection = playerSelection.toUpperCase();
+    while ( playerSelection != "ROCK" && playerSelection != "PAPER" && playerSelection != "SCISSORS"){
+        playerSelection = window.prompt("ups! please select Rock, Paper or Scissors?")
+        playerSelection = playerSelection.toUpperCase();
+    }
+    return playerSelection;
+}
+
+function plays(computerSelection, playerSelection){
+
+    if (computerSelection == playerSelection){
+        return "DRAW"
+    }else if((computerSelection == "ROCK" && playerSelection == "PAPER") || 
+            (computerSelection == "SCISSORS" && playerSelection == "ROCK") || 
+            (computerSelection == "PAPER" && playerSelection == "SCISSORS")){
+                return "PLAYER"
+            }else return "COMPUTER"
+    
+
+}
+
+function game(){
+    console.log("The game starts!");
+    let computerSelection;
+    let playerSelection;
+    let playerPoints = 0;
+    let computerPoints = 0;
+    let roundWinner;
+    for (let i = 0; i < 5; i++) {
+        computerSelection = computerPlay();
+        playerSelection = playerPlay();
+        roundWinner = plays(computerSelection, playerSelection);
+        if (roundWinner != "DRAW") {    
+            roundWinner == "PLAYER" ? ++playerPoints : ++computerPoints; 
+            console.log("round winner: " + roundWinner + "  -  Player: " + playerPoints + " Computer: " + computerPoints)
+        }else {
+            --i
+            console.log("It's a draw! select again!")
+        }
+    }
+
+    if (computerPoints > playerPoints) {  
+        console.log("Computer won! Player points: " + playerPoints + " Computer: " + computerPoints)
+
+    }else{
+        console.log("Player won! Player points: " + playerPoints + " Computer: " + computerPoints)
+    }
+
+}
+
+
+
+
+</script>
+</body>
